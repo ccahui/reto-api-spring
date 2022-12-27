@@ -25,6 +25,8 @@ public class CargarData implements CommandLineRunner {
 
         Cliente clienteA = new Cliente().builder().codigoUnico("123456").nombre("Kristian").apellidos("Juan").tipoDocumento(TipoDocumento.DNI).numeroDocumento("12345678").build();
 
+
+
         clienteRepository.save(clienteA);
 
         log.info("Cliente Creados " + clienteRepository.findAll());
