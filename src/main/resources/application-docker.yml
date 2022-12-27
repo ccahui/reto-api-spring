@@ -1,0 +1,18 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: cliente
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:clientDockerDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    platform: h2
+    password: ''
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: 'true'
+
