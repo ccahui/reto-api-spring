@@ -17,4 +17,4 @@ EXPOSE 8091
 
 
 COPY --from=dependencies /target/$ARTIFACT_NAME /app/app.jar
-CMD ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "/app/app.jar"]
+CMD ["java", "-Dspring.profiles.active=${PROFILE}","-Duser.timezone=America/Lima", "-jar", "/app/app.jar"]
