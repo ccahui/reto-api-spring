@@ -6,6 +6,7 @@ import com.reto.cliente.entity.Cliente;
 import com.reto.cliente.exceptions.NotFoundException;
 import com.reto.cliente.mapper.MapperCliente;
 import com.reto.cliente.repository.RepositorioCliente;
+import com.reto.cliente.utils.Cifrar;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 
     private final RepositorioCliente repositorioCliente;
     private final MapperCliente mapperCliente;
+    private final Cifrar cifrar;
 
     @Override
     public List<ClienteDto> listar() {
@@ -32,6 +34,12 @@ public class ServicioClienteImpl implements ServicioCliente {
         return mapperCliente.entityToDto(cliente);
     }
 
+    @Override
+    public ClienteDto buscarPorCodigoEncriptado(String codigoEncriptado) {
+        String codigo = cifrar.desencriptar(codigoEncriptado);
+        Cliente cliente = repositorioCliente.findByCodigoUnico(codigo).orElseThrow(() -> new NotFoundException("Cliente codigoUnico (" + codigo + ")"));
+        return mapperCliente.entityToDto(cliente);
+    }
     @Override
     public ClienteDto actualizar(String codigo, ActualizarClienteDto clienteDto) {
         Cliente cliente = repositorioCliente.findByCodigoUnico(codigo).orElseThrow(() -> new NotFoundException("Cliente codigoUnico (" + codigo + ")"));

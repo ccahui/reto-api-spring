@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,13 @@ public class ControladorCliente {
     public ClienteDto create(@PathVariable String codigo, @Valid @RequestBody ActualizarClienteDto cliente) {
         return servicioCliente.actualizar(codigo, cliente);
     }
+
+    @GetMapping(value = {"/encriptado/{codigoEncriptado}"})
+    public ClienteDto buscarPorCodigoEncriptado(@PathVariable String codigoEncriptado) {
+        return servicioCliente.buscarPorCodigoEncriptado(codigoEncriptado);
+    }
+
+
 
 
 }
