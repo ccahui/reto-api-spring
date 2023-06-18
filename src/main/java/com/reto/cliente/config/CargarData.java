@@ -24,19 +24,20 @@ public class CargarData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Cliente clienteA = new Cliente().builder().codigoUnico("123456")
-                .nombre("Kristian").apellidos("Juan")
-                .tipoDocumento(TipoDocumento.DNI).numeroDocumento("12345678").build();
+            Cliente clienteA = new Cliente().builder().codigoUnico("123456")
+                    .nombre("Kristian").apellidos("Juan")
+                    .tipoDocumento(TipoDocumento.DNI).numeroDocumento("12345678").build();
 
-        Cliente clienteB = new Cliente().builder().codigoUnico("654321")
-                .nombre("Jose").apellidos("Laura")
-                .tipoDocumento(TipoDocumento.CARNET_EXTRANJERIA).numeroDocumento("053456789948").build();
+            Cliente clienteB = new Cliente().builder().codigoUnico("654321")
+                    .nombre("Jose").apellidos("Laura")
+                    .tipoDocumento(TipoDocumento.CARNET_EXTRANJERIA).numeroDocumento("053456789948").build();
 
-        Cliente clienteC = new Cliente().builder().codigoUnico("111111")
-                .nombre("Waldir").apellidos("Davila")
-                .tipoDocumento(TipoDocumento.PASAPORTE).numeroDocumento("123456780589").build();
+            Cliente clienteC = new Cliente().builder().codigoUnico("111111")
+                    .nombre("Waldir").apellidos("Davila")
+                    .tipoDocumento(TipoDocumento.PASAPORTE).numeroDocumento("123456780589").build();
 
-        clienteRepository.saveAll(Arrays.asList(clienteA, clienteB, clienteC));
-        log.info("Clientes Creados " + clienteRepository.findAll());
+            clienteRepository.saveAll(Arrays.asList(clienteA, clienteB, clienteC));
+            log.info("Clientes Creados " + clienteRepository.findAll());
+
     }
 }
