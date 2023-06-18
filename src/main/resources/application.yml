@@ -4,15 +4,12 @@ spring:
   application:
     name: cliente
   datasource:
-    username: sa
-    url: jdbc:h2:mem:clientDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    platform: h2
-    password: ''
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?useSSL=false&serverTimezone=UTC
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-    database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: 'true'
-
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
