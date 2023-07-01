@@ -7,10 +7,12 @@ import com.reto.cliente.exceptions.NotFoundException;
 import com.reto.cliente.mapper.MapperCliente;
 import com.reto.cliente.repository.RepositorioCliente;
 import com.reto.cliente.utils.Cifrar;
+import com.reto.cliente.validation.FileSizeValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
