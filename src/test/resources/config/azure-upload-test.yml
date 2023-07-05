@@ -1,0 +1,4 @@
+storage:
+  connectionString: "DefaultEndpointsProtocol=https;AccountName=<account-name>;AccountKey=<account-key>;EndpointSuffix=core.windows.net"
+  containerName: "my-container"
+
