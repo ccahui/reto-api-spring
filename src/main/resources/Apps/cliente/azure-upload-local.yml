@@ -1,3 +1,2 @@
 storage:
-  connectionString: "${AZURE_STORAGE_CONNECTION_STRING}"
-  containerName: "my-container"
+  connectionSasContainerString: "${AZURE_STORAGE_SAS_CONNECTION_STRING}"

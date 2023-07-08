@@ -1,10 +1,7 @@
 package com.reto.cliente.service;
 
 
-import com.azure.storage.blob.BlobClient;
-import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.BlobServiceClient;
-import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.*;
 import com.azure.storage.blob.models.BlobDownloadResponse;
 import com.azure.storage.blob.models.BlobHttpHeaders;
 import com.azure.storage.blob.models.BlobProperties;
@@ -35,8 +32,8 @@ public class UploadAzureServiceImpl implements UploadService {
     public UploadDto upload(MultipartFile file) {
 
 
-        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(azureUploadConfig.getConnectionString()).buildClient();
-        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(azureUploadConfig.getContainerName());
+       //La cadena de conexion contiene al contenedor llamado "my-container"
+        BlobContainerClient containerClient = new BlobContainerClientBuilder().endpoint(azureUploadConfig.getConnectionSasContainerString()).buildClient();
 
         String fileName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
         BlobClient blobClient = containerClient.getBlobClient(fileName);
@@ -59,8 +56,8 @@ public class UploadAzureServiceImpl implements UploadService {
 
     @Override
     public ResponseEntity<Resource> dowload(String blobName) {
-        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(azureUploadConfig.getConnectionString()).buildClient();
-        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(azureUploadConfig.getContainerName());
+
+        BlobContainerClient containerClient = new BlobContainerClientBuilder().endpoint(azureUploadConfig.getConnectionSasContainerString()).buildClient();
 
         BlobClient blobClient = containerClient.getBlobClient(blobName);
 
