@@ -18,5 +18,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class AzureUploadConfig {
-    private String connectionSasContainerString;
+    private String accountEndpoint;
+    private String containerName;
 }
