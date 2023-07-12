@@ -1,3 +1,2 @@
 storage:
-  accountEndpoint: "https://<storage-account-name>.blob.core.windows.net"
-  containerName: "<contenedor>"ntainer-name>/<blob-name>?sp=<permissions>&st=<start-time>&se=<expiry-time>&spr=https&sv=<version>&sr=b&sig=<signature>"
+  connectionSasContainerString: "https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>?sp=<permissions>&st=<start-time>&se=<expiry-time>&spr=https&sv=<version>&sr=b&sig=<signature>"

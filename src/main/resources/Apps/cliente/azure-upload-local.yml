@@ -1,3 +1,2 @@
 storage:
-  accountEndpoint: "${ACCOUNT_CONNECTION}"
-  containerName: "${CONTAINER_NAME}"
+  connectionSasContainerString: "${AZURE_STORAGE_SAS_CONNECTION_STRING}"
