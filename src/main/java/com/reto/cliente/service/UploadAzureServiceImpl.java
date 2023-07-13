@@ -1,11 +1,10 @@
 package com.reto.cliente.service;
 
 
-import com.azure.core.credential.TokenCredential;
-import com.azure.identity.ChainedTokenCredentialBuilder;
-import com.azure.identity.ManagedIdentityCredential;
-import com.azure.identity.ManagedIdentityCredentialBuilder;
-import com.azure.storage.blob.*;
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.blob.models.BlobDownloadResponse;
 import com.azure.storage.blob.models.BlobHttpHeaders;
 import com.azure.storage.blob.models.BlobProperties;
@@ -35,12 +34,8 @@ public class UploadAzureServiceImpl implements UploadService {
     Logger logger = Logger.getLogger(UploadAzureServiceImpl.class.getName());
     public UploadDto upload(MultipartFile file) {
 
-        BlobServiceClientBuilder builder = new BlobServiceClientBuilder().endpoint(azureUploadConfig.getAccountEndpoint());
 
-        ManagedIdentityCredential managedIdentityCredential = new ManagedIdentityCredentialBuilder().build();
-        TokenCredential tokenCredential = new ChainedTokenCredentialBuilder().addLast(managedIdentityCredential).build();
-        BlobServiceClient blobServiceClient = builder.credential(tokenCredential).buildClient();
-
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(azureUploadConfig.getConnectionString()).buildClient();
         BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(azureUploadConfig.getContainerName());
 
         String fileName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
@@ -64,13 +59,7 @@ public class UploadAzureServiceImpl implements UploadService {
 
     @Override
     public ResponseEntity<Resource> dowload(String blobName) {
-
-        BlobServiceClientBuilder builder = new BlobServiceClientBuilder().endpoint(azureUploadConfig.getAccountEndpoint());
-
-        ManagedIdentityCredential managedIdentityCredential = new ManagedIdentityCredentialBuilder().build();
-        TokenCredential tokenCredential = new ChainedTokenCredentialBuilder().addLast(managedIdentityCredential).build();
-        BlobServiceClient blobServiceClient = builder.credential(tokenCredential).buildClient();
-
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(azureUploadConfig.getConnectionString()).buildClient();
         BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(azureUploadConfig.getContainerName());
 
         BlobClient blobClient = containerClient.getBlobClient(blobName);
